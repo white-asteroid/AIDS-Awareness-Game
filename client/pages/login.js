@@ -9,7 +9,7 @@ export default function Login() {
         e.preventDefault();
         console.log(em, pw);
         axios
-            .post("http://localhost:3000/api/login",
+            .post("http://localhost:8000/api/login",
                 {
                     em,
                     pw
