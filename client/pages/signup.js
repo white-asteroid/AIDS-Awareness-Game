@@ -1,23 +1,42 @@
 import { useState } from "react";
-import "../public/css/signup.module.css"
+// import "../public/css/signup.module.css"
 import axios from "axios";
+import React from "react";
+import {toast} from "react-toastify";
+import {Modal} from "antd";
+import SignupForm from "../component/forms/signup";
 
+
+import Link from "next/link";
 export default function Signup() {
   const [name, setName] = useState("");
   const [em, setEm] = useState("");
   const [pw, setPw] = useState("");
+  const [ok,setOk] = useState(false);
+  const [loading ,setL]=useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(name,em, pw);
-    axios.post("http://localhost:8000/api/signup", {
+    setL(true);
+    // console.log(name,em, pw);
+   const data = await axios.post(`${process.env.NEXT_PUBLIC_API }/signup`, {
       name,
       em,
       pw,
-    });
+    })
+    .then((res)=> {
+      setName("");
+      setEm("");
+      setPw("");
+      setOk(res.data.ok);
+      // setL(false);
+    })
+    .catch((err)=> toast.error(err.response.data));
+    setL(false);
   }
 
   return (
+    <>
     <section
       className="vh-100 bg-image"
       style={{
@@ -34,56 +53,17 @@ export default function Signup() {
                   <h2 className="text-uppercase text-center mb-5">
                     Create an account
                   </h2>
-                  <form onSubmit={handleSubmit}>
-                    <div className="form-outline mb-4">
-                      <input
-                        value={name} 
-                        onChange={(e)=>{setName(e.target.value)}} 
-                        type="text"
-                        id="name"
-                        className="form-control form-control-lg"
-                      />
-                      <label className="form-label" htmlFor="name">
-                        Your Name
-                      </label>
-                    </div>
-                    <div className="form-outline mb-4">
-                      <input
-                        value={em} onChange={(e)=>{setEm(e.target.value)}} 
-                        type="email"
-                        id="email"
-                        className="form-control form-control-lg"
-                      />
-                      <label className="form-label" htmlFor="email">
-                        Your Email
-                      </label>
-                    </div>
-                    <div className="form-outline mb-4">
-                      <input
-                        value={pw} onChange={(e)=>{setPw(e.target.value)}} 
-                        type="password"
-                        id="form3Example4cg"
-                        className="form-control form-control-lg"
-                      />
-                      <label className="form-label" htmlFor="form3Example4cg">
-                        Password
-                      </label>
-                    </div>
-                    <div className="d-flex justify-content-center">
-                      <button
-                        type="submit"
-                        className="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
-                      >
-                        Register
-                      </button>
-                    </div>
-                    <p className="text-center text-muted mt-5 mb-0">
-                      Have already an account?{" "}
-                      <a href className="fw-bold text-body">
-                        <u>Login here</u>
-                      </a>
-                    </p>
-                  </form>
+                  <SignupForm 
+                  handleSubmit={handleSubmit}
+                  setName= {setName}
+                  name= {name}
+                  setEm = {setEm}
+                  em={em}
+                  setPw = {setPw}
+                  pw={pw}
+                  loading={loading}
+
+                  />
                 </div>
               </div>
             </div>
@@ -91,5 +71,21 @@ export default function Signup() {
         </div>
       </div>
     </section>
+     <div className="row">
+      <div className="col">
+        <Modal
+          title="Congratulations"
+          visible={ok}
+          onCancel = {() => setOk(false)}
+          footer={null}
+          >
+            <p>You have successfully registered</p>
+            <Link href="/login" >
+              <a className="btn btn-primary brn-small" >Login</a>
+            </Link>
+          </Modal>
+      </div>
+     </div>
+    </>
   );
 }

@@ -19,7 +19,9 @@ mongoose
 
     app.use(express.json({limit : "5mb"}));
     app.use(express.urlencoded({extended : "true"}));
-    app.use(cors({origin:["http://localhost:3000"], }));
+    // app.use(cors({origin:["http://localhost:3000"], }));
+
+    app.use(cors());
 
     // app.post("/api/login",(req,res)=>{
     //     console.log("Register endpoint -> ",req.body);
@@ -30,5 +32,5 @@ mongoose
 
     const port = process.env.PORT || 8000;
      
-    app.listen(port, ()=> console.log(`Server is running bichi ${port}` ));
+    app.listen(port, ()=> console.log(`Server is running at port : ${port}` ));
 

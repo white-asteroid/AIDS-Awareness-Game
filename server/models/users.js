@@ -20,6 +20,19 @@ const UserSchema = new mongoose.Schema({
     // avatar:{
     //     type: String
     // },
+    game1:{
+        type:Number,
+        default: -1,
+    },
+    game2:{
+        type:Number,
+        default: -1,
+    },
+    game3:{
+        type:Number,
+        default: -1,
+    },
+    
     date: {
         type: Date,
         default: Date.now
@@ -30,5 +43,5 @@ const UserSchema = new mongoose.Schema({
 
 },{ timestamp:true }
 );
-// module.exports= User = mongoose.model("users", UserSchema);
-export default mongoose.model("users", UserSchema);
+module.exports= user = mongoose.model("users", UserSchema);
+// export default mongoose.model("users", UserSchema);
