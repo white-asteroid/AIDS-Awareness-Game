@@ -56,7 +56,7 @@ export const signup = async (req, res) => {
       ok: true,
     });
   } catch (err) { 
-    console.log(" la la la registration failed = > ", err);
+    console.log(" la la la registration failed ");
     // return res.status(400).send("NOT VALID DETAILS");
   }
 };
