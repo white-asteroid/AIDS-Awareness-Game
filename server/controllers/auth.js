@@ -1,16 +1,7 @@
 import users from "../models/users";
 import { hashPassword, comparePassword } from "../helpers/auth";
-export function register(req, res) {
-  //  console.log("Register endpoint -> ",req.body);
-  const { em, pw } = req.body;
-  if (em=="") return res.status(400).send("email daalne ka re baba");
-  if (pw=="" ) return res.status(400).send("Not a valid password");
+import jwt from "jsonwebtoken";
 
-  // for checking email
-
-  const exist = users.findOne({ em });
-  if (!exist) return res.status(400).send("not registered");
-}
 
 async function validateEmailAccessibility(email){
 
@@ -19,6 +10,47 @@ async function validateEmailAccessibility(email){
   // console.log(result);
   return result === null;
 }
+export async function Login(req, res) {
+  //  console.log("login endpoint -> ",req.body);
+  const { em, pw } = req.body;
+  if (em=="") return res.status(400).send("Please enter You email address");
+  if (pw=="" ) return res.status(400).send("Not a valid password");
+
+  // for checking email
+
+  // const exist = users.findOne({ em });
+
+  const email = {em};
+  // const Luser ="";
+  // const hashedPW = await hashPassword(pw);
+  // const user = new users({email:em,password:hashedPW} );
+  validateEmailAccessibility(email.em).then(async function(valid) {
+    if (valid) {
+      // console.log("Email not exist/ not valid");
+      return res.status(400).send("Email not registered yet");
+        } else {
+          try{
+      // return res.status(400).send("Email already used");
+      const Luser = await users.findOne({email:em});
+      console.log("YOUR email is L : ",Luser.email); 
+      const match = await comparePassword(pw,Luser.password);
+      if(!match) return res.status(400).send("Wrong password");
+      const token = jwt.sign({_id:Luser._id},process.env.JWT_SECRET,{expiresIn:"7d"});
+      Luser.password = undefined;
+      Luser.secret = undefined;
+      console.log(Luser);
+     res.json({
+      token,Luser,
+     })
+    }
+    catch(err){
+      console.log("LOGIN inside fun ",err);
+    }
+    }
+  })
+  // const match = await comparePassword(pw,)
+}
+
 
 export const signup = async (req, res) => {
   // console.log("Register endpoint -> ", req.body);
@@ -28,10 +60,7 @@ export const signup = async (req, res) => {
   if (!pw || pw.length < 6) return res.status(400).send("Not a valid password");
 
   // for checking email
-  
-  // console.log("Email is ",{em},);
   // const exist = await users.findOne({em});
-  // console.log("EXiste ",exist  );
   // if (exist) return res.status(400).send("signing up error Email already registered : ");
   const email = {em};
   validateEmailAccessibility(email.em).then(function(valid) {

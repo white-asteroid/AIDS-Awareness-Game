@@ -1,0 +1,122 @@
+* {
+	margin: 0;
+	padding: o;
+	box-sizing: border-box;
+	font-weight: 700;
+	font-family: Arial,Helvetica,sans-serif;
+}
+body {
+	background-color: rgb(27, 49, 69);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+.app-wrapper {
+	background-color: #070b15;
+	box-shadow: 3px 6px 40px #61dafb;
+	min-width: 400px;
+	min-height: 580px;
+	padding: 30px;
+	border: 3px solid rgb(106, 184, 106);
+	border-radius: 10px;
+}
+.question-section-wrapper {
+	width: 100%;
+	position: relative;
+	margin-bottom: 20px;
+}
+.question-count {
+	color: white;
+	font-size: 28px;
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 5px;
+	border: 3px solid white;
+	border-radius: 15px;
+	background-color: rgb(99, 132, 62);
+	width: 75%;
+	margin: 20px auto;
+}
+.question {
+	color: white;
+	background-origin: 2px solid rgb(123, 123, 196);
+	background-color: #257c8d;
+	border: 3px solid white;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 12px;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 60px;
+}
+.answer-section-wrapper {
+	background-color: #070b15;
+	border: 2px solid #070b15;
+	border-radius: 10px;
+}
+.answer-List {
+	list-style: none;
+	width: 100%;
+	margin: 30px 0px 30px 0px;
+	display: flex;
+}
+.answer-button {
+	width: 85%;
+	font-size: 20px;
+	color: rgb(253, 254, 254);
+	background-color: #257c8d;
+	border-radius: 15px;
+	padding: 5px;
+	border: 2px solid #070b15;
+	cursor: pointer;
+	margin: 0 auto;
+	&:hover {
+		background-color: #383c45;
+	}
+	&:active {
+		background-color: orange;
+	}
+}
+.next-button {
+	width: 50%;
+	font-family: 24px;
+	color: #070b15;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	background-color: rgb(99, 132, 62);
+	border-radius: 15px;
+	border: 3px solid rgb(243, 241, 241);
+	cursor: pointer;
+	margin: 30px auto;
+	&:hover {
+		background-color: #383c45;
+	}
+}
+button {
+	&:focus {
+		outline: none;
+	}
+}
+.completed {
+	display: flex;
+	justify-content: center;
+	font-size: 40px;
+	color: #070b15;
+	margin: 40px auto;
+}
+.score-section {
+	display: flex;
+	justify-content: center;
+	font-size: 28px;
+	font-weight: 700;
+	color: #e8eaf1;
+}
+.correct {
+	background-color: green;
+}

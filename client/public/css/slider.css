@@ -1,0 +1,11 @@
+img{
+    max-height: 31.25rem;
+}
+h3{
+    background-color: rgb(111, 113, 223);
+    width:fit-content;
+    margin: auto;
+    /* width: 50%; */
+    /* border: 3px solid green; */
+    padding: 10px;
+}

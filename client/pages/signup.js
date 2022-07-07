@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState ,useContext } from "react";
 // import "../public/css/signup.module.css"
 import axios from "axios";
 import React from "react";
 import {toast} from "react-toastify";
 import {Modal} from "antd";
 import SignupForm from "../component/forms/signup";
-
+import { UserContext } from "../context";
+import Router from "next/router";
 
 import Link from "next/link";
 export default function Signup() {
@@ -14,7 +15,8 @@ export default function Signup() {
   const [pw, setPw] = useState("");
   const [ok,setOk] = useState(false);
   const [loading ,setL]=useState(false);
-
+  const [state ] = useContext(UserContext);
+  if(state && state.token) Router.push("/");
   async function handleSubmit(e) {
     e.preventDefault();
     setL(true);
