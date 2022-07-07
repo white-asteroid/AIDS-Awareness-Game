@@ -1,12 +1,11 @@
-import users from "../models/users";
+import {User} from "../models/users";
 import { hashPassword, comparePassword } from "../helpers/auth";
-import jwt from "jsonwebtoken";
-
+import jwt from "jsonwebtoken"; 
 
 async function validateEmailAccessibility(email){
 
   // console.log("Check if ",email);
-  const result = await users.findOne({ email: email });
+  const result = await User.findOne({ email: email });
   // console.log(result);
   return result === null;
 }
@@ -31,7 +30,7 @@ export async function Login(req, res) {
         } else {
           try{
       // return res.status(400).send("Email already used");
-      const Luser = await users.findOne({email:em});
+      const Luser = await User.findOne({email:em});
       console.log("YOUR email is L : ",Luser.email); 
       const match = await comparePassword(pw,Luser.password);
       if(!match) return res.status(400).send("Wrong password");
@@ -60,7 +59,7 @@ export const signup = async (req, res) => {
   if (!pw || pw.length < 6) return res.status(400).send("Not a valid password");
 
   // for checking email
-  // const exist = await users.findOne({em});
+  // const exist = await User.findOne({em});
   // if (exist) return res.status(400).send("signing up error Email already registered : ");
   const email = {em};
   validateEmailAccessibility(email.em).then(function(valid) {
@@ -75,12 +74,12 @@ export const signup = async (req, res) => {
   const hashedPW = await hashPassword(pw);
   console.log("47 good");
   
-  const user = new users({name,email:em,password:hashedPW} );
+  const user = new User({name,email:em,password:hashedPW} );
   console.log("50 good");
   
   try {
    await user.save();
-    // console.log("Reg users -> ", user);
+    // console.log("Reg User -> ", user);
     return res.json({
       ok: true,
     });
@@ -89,3 +88,20 @@ export const signup = async (req, res) => {
     // return res.status(400).send("NOT VALID DETAILS");
   }
 };
+
+export const currentUser = async (req,res) =>{
+
+  console.log(req.headers.authorization.split(' ')[1]);
+  const token = req.headers.authorization.split(' ')[1]; 
+    //Authorization: 'Bearer TOKEN'
+    if(!token)
+    {
+        res.status(200).json({success:false, message: "Error!Token was not provided."});
+    }
+    //Decoding the token
+    const decodedToken = jwt.verify(token,process.env.JWT_SECRET );
+    console.log(decodedToken);
+    res.status(200).json({success:true, data:{userId:decodedToken.userId,
+     email:decodedToken.email}   
+ });
+}
