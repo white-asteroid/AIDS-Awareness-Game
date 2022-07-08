@@ -30,20 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/game2": [
+    "/thankyou": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/game2.js"
-    ],
-    "/login": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/login.js"
-    ],
-    "/signup": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/signup.js"
+      "static/chunks/pages/thankyou.js"
     ]
   },
   "ampFirstPages": []
