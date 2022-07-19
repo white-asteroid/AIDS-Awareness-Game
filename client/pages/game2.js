@@ -53,9 +53,9 @@ function Memorygame() {
     }
   }
   const logout = () => {
-    window.localStorage.removeItem("auth");
-    setState(null);
-    Router.push("/thankyou");
+    // window.localStorage.removeItem("auth");
+    // setState(null);
+    // Router.push("/thankyou");
   };
   async function Gameover(){
     console.log("passing",counterPair,email);
@@ -64,7 +64,7 @@ function Memorygame() {
       score:counterPair,
       email,
     });
-    logout();
+    // logout();
   }
 
   return (
