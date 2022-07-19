@@ -19,7 +19,7 @@ body .game2-main{
     height: calc((100vh - -90px) /6);
     max-height: calc((100vw -90px)/6);
 }
-.card{
+.cards{
     border-radius: 5px;
     position: relative;
     width: 100%;
