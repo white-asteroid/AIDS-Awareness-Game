@@ -2,7 +2,7 @@ import React from "react";
 // import './Game2.css';
 import Countdown from 'react-countdown';
 // import { card } from 'react-bootstrap';
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 // import p1 from "../game2/Img/img2.jpg";
 // import Images from "../component/game2_components/Images";
 import { UserContext } from "../context";
@@ -19,17 +19,32 @@ function Memorygame() {
   const [activeCards, setActiveCards] = useState([]);
   const [foundPairs, setFoundPairs] = useState([]);
   const [counterPair, setPairCounter] = useState(0);
-  const [state,setState] = useContext(UserContext);
+  const [state, setState] = useContext(UserContext);
   const router = useRouter();
-  if(state && state.Luser ) 
-  {console.log(state.Luser.email);
-  const email = state.Luser.email;}
-  const [Datenow,setDatenow] = useState(Date.now());
+  if (state && state.Luser) {
+    console.log(state.Luser.email);
+    const email = state.Luser.email;
+  }
+  const [Datenow, setDatenow] = useState(Date.now());
   // if(cards!==null)
   // {
   //   console.log(cards);
   // }
   function flipCard(index) {
+
+    /// If cards are in found pair do nothing (exit from function)
+    for (var i = 0; i < foundPairs.length; i++) {
+      if (index === foundPairs[i]) {
+        return;
+      }
+    }
+
+    /// If single card in active card and clicking on same card do nothing 
+    if (activeCards[0] === index) {
+      console.log("clicked on same card");
+      return;
+    }
+
     if (activeCards.length === 0) {
       setActiveCards([index]);
     }
@@ -57,28 +72,28 @@ function Memorygame() {
     // setState(null);
     // Router.push("/thankyou");
   };
-  async function Gameover(){
-    console.log("passing",counterPair,email);
-    const data =  axios
-    .post("http://localhost:8000/api/game2", {
-      score:counterPair,
-      email,
-    });
+  async function Gameover() {
+    console.log("passing", counterPair, email);
+    const data = axios
+      .post("http://localhost:8000/api/game2", {
+        score: counterPair,
+        email,
+      });
     // logout();
   }
 
   return (
     <UserRoute>
       <div className=".game2-main">
-        
 
-        <h3 className={"game2Heading"}>{counterPair} 
-          pairs found so far Time left : 
-          <Countdown 
-            date={Number(Datenow)+15000} 
+
+        <h3 className={"game2Heading"}>{counterPair}
+          pairs found so far Time left :
+          <Countdown
+            date={Number(Datenow) + 15000}
             onComplete={Gameover}
-           
-           />
+
+          />
         </h3>
 
         <div className="board">
@@ -92,7 +107,7 @@ function Memorygame() {
                 className={"card-outer " + (flippedToFront ? "flipped" : "")}
                 onClick={() => flipCard(index)}
               >
-                <div className="cards">
+                <div className="gamecard">
                   <div className="front">
                     <img src={card.src} alt={`img${index}`} />
                   </div>
