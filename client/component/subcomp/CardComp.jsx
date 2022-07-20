@@ -7,7 +7,7 @@ export default function CardComp(props) {
   return (
     <div className="col-4 p-4" >
       <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={props.imgsrc} />
+        <img variant="top" src={props.imgsrc} />
         <Card.Body>
           <Card.Title>{props.ctitle}</Card.Title>
           <Card.Text>
