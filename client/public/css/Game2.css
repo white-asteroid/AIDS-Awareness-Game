@@ -19,7 +19,7 @@ body .game2-main{
     height: calc((100vh - -90px) /6);
     max-height: calc((100vw -90px)/6);
 }
-.card{
+.gamecard{
     border-radius: 5px;
     position: relative;
     width: 100%;
@@ -29,7 +29,7 @@ body .game2-main{
     transition: all  0.3s;
 }
 
-.card .front img{
+.gamecard .front img{
     display: block;
     max-width:100%;
     border-radius: 4px;
@@ -38,17 +38,17 @@ body .game2-main{
     object-fit: fill;
 }
 
-.card .front, .card .back {
+.gamecard .front, .gamecard .back {
     position: absolute;
     width: 100%;
     height:100%;
     backface-visibility: hidden;
 }
-.card .back{
+.gamecard .back{
     background-color: #7f8c8d;
     transform: rotateY(180deg);
 }
 
-.card-outer.flipped .card{
+.card-outer.flipped .gamecard{
     transform: rotateY(0);
 }

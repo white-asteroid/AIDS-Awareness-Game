@@ -12,7 +12,7 @@ export default function Slider() {
         <Carousel.Item interval={1500}>
           <img
             className="d-block w-100 "
-            src="https://www.slma.cc/wp-content/uploads/2017/11/SLMA_AIDS-1080x675.jpg"
+            src="https://i.pinimg.com/originals/3a/ab/84/3aab841b94378e4cf2ae2f1acb03c96f.jpg"
             alt="Image One"
           />
           <Carousel.Caption>
@@ -23,7 +23,7 @@ export default function Slider() {
         <Carousel.Item interval={1500}>
           <img
             className="d-block w-100"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1FC5iUNonXctxZ7sCqkXF4qyndml58oe2KieA7jIT2iezxxSnKmyhlEisNN4vNDpDS6s&usqp=CAU"
+            src="https://wallpapercave.com/wp/wp4831901.jpg"
             alt="Image Two"
             />
           <Carousel.Caption>
@@ -34,7 +34,7 @@ export default function Slider() {
         <Carousel.Item interval={1500}>
           <img
             className="d-block w-100"
-            src="https://cdn.pixabay.com/photo/2018/12/07/12/04/hiv-3861572_1280.jpg"
+            src="https://godwallpaper.in/wallpaper/M005/C049/SC101/large/Aids_Day00X8.jpg"
             alt="Image One"
           />
           <Carousel.Caption>
